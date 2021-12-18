@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <title>Document</title>
+</head>
+<style>
+    body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #2a93f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Montserrat";
+  font-weight: 700;
+  padding-top: 50vh;
+}
+
+button {
+  outline: 0;
+}
+button.active {
+  outline: 0;
+}
+
+button.sub-btn {
+  border: 2px solid #fff;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 50px;
+  padding: 15px 80px;
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+  transform: translateY(-50%);
+}
+button.sub-btn .text.active {
+  transform: translateY(-350%) scale(0);
+  transition: 0.35s cubic-bezier(0.34, -0.61, 1, 0.64);
+}
+button.sub-btn.active {
+  padding: 0px 80px;
+  transition: 0.4s cubic-bezier(0.35, -0.77, 0.67, 1.88);
+}
+button.sub-btn .loader {
+  position: absolute;
+  width: calc(0% - 4px);
+  height: calc(100% - 4px);
+  background-color: rgb(224, 4, 4);
+  left: 2px;
+  top: 2px;
+  border-radius: 50px;
+}
+
+button.sub-btn .loader.active {
+  width: calc(100% - 4px);
+  transition: 1.3s ease-in-out;
+  transition-delay: 0.9s;
+  background-color: rgb(255, 255, 255);
+  font-weight: 600;
+}
+button.sub-btn .done {
+  color: #04531e;
+  margin-top: -15px;
+  transform: translateY(300%) scale(0);
+}
+button.sub-btn .done.active {
+  transform: translateY(0%) scale(1);
+  transition: 0.4s cubic-bezier(0.34, -0.61, 1, 0.64);
+}
+button.sub-btn.finished {
+  padding: 15px 80px;
+  transition: 0.4s cubic-bezier(0.35, -0.77, 0.67, 1.88);
+}
+</style>
+<body>
+    
+<button class="sub-btn"> 
+    <div class="text">SEND</div>
+    <div class="loader"></div>
+    <div class="done">SUCCESS</div>
+  </button>
+</body>
+<script>
+    $(".sub-btn").on("click", function () {
+	$(".text").addClass("active");
+	$(".sub-btn").addClass("active");
+	$(".loader").addClass("active");
+	$(".sub-btn")
+		.delay(2000)
+		.queue(function () {
+			$(this).addClass("finished").clearQueue();
+		});
+
+	$(".done")
+		.delay(1800)
+		.queue(function () {
+			$(this).addClass("active").clearQueue();
+		});
+});
+
+</script>
+</html>
